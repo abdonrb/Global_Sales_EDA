@@ -84,14 +84,18 @@ class DataFrameAnalyzer:
         """
         numeric_df = self.df.select_dtypes(include=['number'])  # Filtrar solo variables numéricas
         
-        # Calcular estadísticas
-        stats = numeric_df.describe().T
-        stats['mean'] = numeric_df.mean()
-        stats['median'] = numeric_df.median()
-        stats['mode'] = numeric_df.mode().iloc[0]
-        stats['std_dev'] = numeric_df.std()
-        stats['skewness'] = numeric_df.skew()
-        stats['kurtosis'] = numeric_df.kurt()
+        for col in numeric_df:
+            if "id" in col.lower() or col.lower() == "rowid":
+                pass
+            else:
+                # Calcular estadísticas
+                stats = numeric_df.describe().T
+                stats['mean'] = numeric_df.mean()
+                stats['median'] = numeric_df.median()
+                stats['mode'] = numeric_df.mode().iloc[0]
+                stats['std_dev'] = numeric_df.std()
+                stats['skewness'] = numeric_df.skew()
+                stats['kurtosis'] = numeric_df.kurt()
         
         return stats[['count', 'mean', 'median', 'mode', 'std_dev', 'min', '25%', '50%', '75%', 'max', 'skewness', 'kurtosis']]
 
