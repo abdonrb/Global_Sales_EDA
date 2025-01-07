@@ -85,6 +85,8 @@ El **DataSet de Merch Sales** ofrece un conjunto de datos excelente para analiza
 ## **Conclusiones**
  - La categoría Clothing representa una oportunidad clave para aumentar las ventas mediante promociones.
  - Las ciudades de alto gasto pueden ser objetivo para campañas de marketing personalizadas.
+ - La mayoria de ordenes son locales.
+ - Los clientes con pedidos grandes (cantidad o precio elevado) explican la mayoría de los outliers detectados.
  
 
 
