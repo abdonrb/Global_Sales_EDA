@@ -39,7 +39,7 @@ El **DataSet de Merch Sales** ofrece un conjunto de datos excelente para analiza
 
  - Diagramas de caja para analizar la distribución de precios por productos.
 
- ![Total_Sales](reports/boxPlot.png)
+ ![Total_Sales](reports/BoxPlot.png)
 
  - Mapas de calor para representar correlaciones entre variables numéricas.
 
