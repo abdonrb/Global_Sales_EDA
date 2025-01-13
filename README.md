@@ -35,15 +35,15 @@ El **DataSet de Merch Sales** ofrece un conjunto de datos excelente para analiza
 4. ### **Visualizaciones:**
  - Gráfico de barras para comparar ventas totales y ordenes por ciudad:
 
- ![Total_Sales](reports/Total_Sales.png)
+ ![Total_Sales](reports/Images/Total_Sales.png)
 
  - Diagramas de caja para analizar la distribución de precios por productos.
 
- ![Total_Sales](reports/BoxPlot.png)
+ ![Total_Sales](reports/Images/BoxPlot.png)
 
  - Mapas de calor para representar correlaciones entre variables numéricas.
 
- ![Total_Sales](reports/correlacion.png)
+ ![Total_Sales](reports/Images/correlacion.png)
 
  5. ### **Tratamiento de Outliers**
  - Uso del rango intercuartílico (IQR) para detectar valores extremos.
