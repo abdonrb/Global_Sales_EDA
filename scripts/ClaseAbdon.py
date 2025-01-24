@@ -139,26 +139,43 @@ class DataFrameAnalyzer:
             plt.tight_layout()
             plt.show()
 
-    def plot_categorical(self):
+    def plot_categorical(self, max_cats=10):
         """
-        Genera gráficos de barras y pie charts para todas las variables categóricas.
+        Genera gráficos para variables categóricas, manejando un gran número de categorías.
+
+        Args:
+            max_cats (int): Número máximo de categorías a mostrar en el gráfico.
         """
         categorical_df = self.df.select_dtypes(include=['object', 'category'])
         for col in categorical_df.columns:
-            plt.figure(figsize=(14, 6))
-            
-            # Gráfico de barras
+            num_cats = categorical_df[col].nunique()
+
+            plt.figure(figsize=(14, min(num_cats * 0.5, 12))) #Ajusta el tamaño del grafico segun la cantidad de categorias hasta un maximo
+
+            # Gráfico de barras (horizontal)
             plt.subplot(1, 2, 1)
-            sns.countplot(y=categorical_df[col], order=categorical_df[col].value_counts().index, color='blue')
-            plt.title(f"Frecuencia de {col}")
+            counts = categorical_df[col].value_counts()
+            
+            if num_cats > max_cats:
+                counts = counts[:max_cats]
+                plt.title(f"Frecuencia de {col} (Top {max_cats})")
+            else:
+                plt.title(f"Frecuencia de {col}")
+            
+            sns.barplot(x=counts.values, y=counts.index, palette="viridis")
             plt.xlabel("Frecuencia")
             plt.ylabel(col)
-            
-            # Pie chart
-            plt.subplot(1, 2, 2)
-            categorical_df[col].value_counts().plot.pie(autopct='%1.1f%%', startangle=90, cmap="viridis")
-            plt.title(f"Proporción de {col}")
-            plt.ylabel("")
-            
+
+            # Pie chart (solo para un número manejable de categorías)
+            if num_cats <= max_cats: #Solo muestra el pie chart si la cantidad de categorias es menor o igual al maximo
+                plt.subplot(1, 2, 2)
+                counts.plot.pie(autopct='%1.1f%%', startangle=90, cmap="viridis", textprops={'fontsize': 10}) #Ajusta el tamaño de la fuente del pie chart
+                plt.title(f"Proporción de {col}")
+                plt.ylabel("")
+            else:
+                plt.subplot(1,2,2)
+                plt.text(0.5, 0.5, f"Demasiadas categorías ({num_cats}) para mostrar en un gráfico circular.", ha='center', va='center', fontsize=12) #Mensaje alternativo
+                plt.axis('off')
+
             plt.tight_layout()
             plt.show()
