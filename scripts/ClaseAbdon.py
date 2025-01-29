@@ -190,10 +190,14 @@ class DataFrameAnalyzer:
 
             Returns:
                 Un diccionario con los resultados del test para cada variable numérica.
+
             """
+            lista = []
             variables_numericas =self.df.select_dtypes(include=['number'])
             
             for columna in variables_numericas.columns:
                 stat, p = shapiro(self.df[columna])
+                lista.append(f'Resultados de {columna}: Estadistico:{stat} P_VALOR:{p}')
 
-            return f'Resultados de {columna}: Estadistico:{stat} P_VALOR:{p}'
+
+            return lista
