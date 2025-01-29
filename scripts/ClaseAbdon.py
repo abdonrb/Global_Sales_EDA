@@ -181,7 +181,7 @@ class DataFrameAnalyzer:
             plt.tight_layout()
             plt.show()
 
-    def test_normalidad_variables_numericas(self) -> pd.DataFrame:
+    def test_Ksmirnov(self) -> pd.DataFrame:
             """
             Realiza el test de Shapiro-Wilk a todas las variables numéricas de un DataFrame.
 
@@ -197,7 +197,6 @@ class DataFrameAnalyzer:
             
             for columna in variables_numericas.columns:
                 stat, p = kstest(self.df[columna],'norm')
-                lista.append(f'Resultados test Kolmogorov-Smirnov columna {columna}: Estadistico:{stat} P_VALOR:{p}')
-
-
+                lista.append(f'Resultados test Kolmogorov-Smirnov columna {columna}       : Estadistico:{stat} P_VALOR:{p}')
+                
             return lista
