@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
-from scipy.stats import shapiro
+from scipy.stats import kstest
 warnings.filterwarnings('ignore')
 
 class DataFrameAnalyzer:
@@ -196,8 +196,8 @@ class DataFrameAnalyzer:
             variables_numericas =self.df.select_dtypes(include=['number'])
             
             for columna in variables_numericas.columns:
-                stat, p = shapiro(self.df[columna])
-                lista.append(f'Resultados de {columna}: Estadistico:{stat} P_VALOR:{p}')
+                stat, p = kstest(self.df[columna])
+                lista.append(f'Resultados test Kolmogorov-Smirnov columna {columna}: Estadistico:{stat} P_VALOR:{p}')
 
 
             return lista
