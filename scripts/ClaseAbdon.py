@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
+from scipy.stats import shapiro
 warnings.filterwarnings('ignore')
 
 class DataFrameAnalyzer:
@@ -179,3 +180,23 @@ class DataFrameAnalyzer:
 
             plt.tight_layout()
             plt.show()
+
+    def test_normalidad_variables_numericas(self) -> pd.DataFrame:
+            """
+            Realiza el test de Shapiro-Wilk a todas las variables numéricas de un DataFrame.
+
+            Args:
+                df: El DataFrame de pandas.
+
+            Returns:
+                Un diccionario con los resultados del test para cada variable numérica.
+            """
+
+            resultados = {}
+            variables_numericas =self.df.select_dtypes(include=['number'])
+            
+            for columna in variables_numericas.columns:
+                stat, p = shapiro(self.df[columna])
+                resultados[columna] = {'estadistico': stat, 'p_valor': p}
+
+            return f'Resultados de {columna}: {resultados}'
