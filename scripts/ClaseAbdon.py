@@ -196,7 +196,7 @@ class DataFrameAnalyzer:
             variables_numericas =self.df.select_dtypes(include=['number'])
             
             for columna in variables_numericas.columns:
-                stat, p = kstest(self.df[columna])
+                stat, p = kstest(self.df[columna],'norm')
                 lista.append(f'Resultados test Kolmogorov-Smirnov columna {columna}: Estadistico:{stat} P_VALOR:{p}')
 
 
