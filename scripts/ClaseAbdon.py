@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
-from scipy.stats import kstest
+from scipy.stats import kstest,normaltest,shapiro
 warnings.filterwarnings('ignore')
 
 class DataFrameAnalyzer:
@@ -197,6 +197,30 @@ class DataFrameAnalyzer:
             
             for columna in variables_numericas.columns:
                 stat, p = kstest(self.df[columna],'norm')
-                lista.append(f'Resultados test Kolmogorov-Smirnov columna {columna}       : Estadistico:{stat} P_VALOR:{p}')
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                lista.append(resultado)
                 
+            return lista
+
+    def test_normalidad(self):
+
+            lista = []
+            variables_numericas =self.df.select_dtypes(include=['number'])
+                
+            for columna in variables_numericas.columns:
+                stat, p = normaltest(self.df[columna])
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                lista.append(resultado)
+                    
+            return lista
+
+    def test_shapiro(self):
+            lista = []
+            variables_numericas =self.df.select_dtypes(include=['number'])
+                
+            for columna in variables_numericas.columns:
+                stat, p = shapiro(self.df[columna])
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                lista.append(resultado)
+                        
             return lista
