@@ -197,7 +197,7 @@ class DataFrameAnalyzer:
             
             for columna in variables_numericas.columns:
                 stat, p = kstest(self.df[columna],'norm')
-                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.6f} | P-Valor: {p}")
                 lista.append(resultado)
                 
             return lista
@@ -209,7 +209,7 @@ class DataFrameAnalyzer:
                 
             for columna in variables_numericas.columns:
                 stat, p = normaltest(self.df[columna])
-                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.6f} | P-Valor: {p}")
                 lista.append(resultado)
                     
             return lista
@@ -220,7 +220,7 @@ class DataFrameAnalyzer:
                 
             for columna in variables_numericas.columns:
                 stat, p = shapiro(self.df[columna])
-                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.4f} | P-Valor: {p:.4f}")
+                resultado = (f"Columna: {columna:<20} | Estadístico: {stat:.6f} | P-Valor: {p}")
                 lista.append(resultado)
                         
             return lista
